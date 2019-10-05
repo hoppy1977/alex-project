@@ -1,6 +1,9 @@
 ﻿Public Class MainForm
+
+    Dim _employees As New List(Of Employee)
+
     Private Sub ReadDataButton_Click(sender As Object, e As EventArgs) Handles ReadDataButton.Click
-        Dim form = New ReadDataForm()
+        Dim form = New ReadDataForm(_employees)
         form.Show()
     End Sub
 
@@ -13,6 +16,20 @@
     End Sub
 
     Private Sub DisplayPayrollResultsButton_Click(sender As Object, e As EventArgs) Handles DisplayPayrollResultsButton.Click
+
+        Dim messageText As String
+
+        For Each employee As Employee In _employees
+            messageText += employee.Id & vbTab &
+                employee.LastName & vbTab &
+                employee.FirstName & vbTab &
+                employee.CalculateHoursWorked() & vbTab &
+                employee.CalculateGrossPay() & vbTab &
+                employee.CalculateNetPay() &
+                Environment.NewLine
+        Next
+
+        MessageBox.Show(messageText)
 
     End Sub
 
